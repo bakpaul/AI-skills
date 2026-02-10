@@ -1,0 +1,107 @@
+{
+  "evals": [
+    {
+      "prompt": "I'd like to create a shared library with CMake. Can you give me a complete example from compilation with dependencies to installation?",
+      "expectations": [
+        "Provides a complete CMakeLists.txt for a shared library",
+        "Includes add_library with SHARED",
+        "Shows how to handle dependencies with find_package or target_link_libraries",
+        "Includes installation commands (install targets, headers)",
+        "Uses modern target-based approach with target_include_directories",
+        "Explains the purpose of each section"
+      ]
+    },
+    {
+      "prompt": "I want my library to be distributable, so that another project can use it with CMake after installation. What do I need to add?",
+      "expectations": [
+        "Mentions creating a Config.cmake file",
+        "Shows install(EXPORT ...) for targets",
+        "Includes CMakePackageConfigHelpers usage",
+        "Creates a version file with write_basic_package_version_file",
+        "Explains how consumers will use find_package to find the library",
+        "Shows the complete integration (both library and consumer sides)"
+      ]
+    },
+    {
+      "prompt": "I don't understand why my find_package isn't finding the library",
+      "expectations": [
+        "Asks for details about the error or provides general debugging steps",
+        "Mentions CMAKE_PREFIX_PATH or <Package>_DIR",
+        "Suggests enabling CMAKE_FIND_DEBUG_MODE for diagnostics",
+        "Explains the find_package search mechanism (Module vs Config mode)",
+        "Provides systematic troubleshooting steps",
+        "Checks if user is searching for the right package name"
+      ]
+    },
+    {
+      "prompt": "Headers from a dependency found by CMake are not found during compilation",
+      "expectations": [
+        "Identifies this as a linking/include issue not a find_package issue",
+        "Asks if find_package succeeded or provides diagnostic steps",
+        "Suggests checking the IMPORTED target name being used",
+        "Recommends using target_link_libraries with correct target",
+        "Explains the difference between finding a package and linking it",
+        "May suggest checking if the target includes are properly set"
+      ]
+    },
+    {
+      "prompt": "What is a target, and why do I need one?",
+      "expectations": [
+        "Defines what a CMake target is (build artifact or logical grouping)",
+        "Lists different target types (executable, library, imported, interface)",
+        "Explains benefits: transitive dependencies, encapsulation, modern CMake",
+        "Provides concrete examples of creating and using targets",
+        "Contrasts with old-style directory-scope variables",
+        "Makes the concept accessible without overwhelming jargon"
+      ]
+    },
+    {
+      "prompt": "How do I ensure my target is properly found by an application looking for my package?",
+      "expectations": [
+        "Explains the full export/install/config chain",
+        "Mentions install(EXPORT) with correct namespace",
+        "Shows that Config.cmake must include the Targets file",
+        "Provides a consumer example using find_package",
+        "Suggests testing the package after installation",
+        "May include a checklist of requirements",
+        "Explains common mistakes (wrong namespace, missing include of Targets.cmake)"
+      ]
+    },
+    {
+      "prompt": "How can I automatically download and use a dependency that's not installed on my system? I don't want to install it manually.",
+      "expectations": [
+        "Introduces FetchContent module as the solution",
+        "Shows FetchContent_Declare and FetchContent_MakeAvailable",
+        "Provides a complete working example",
+        "Mentions different content sources (Git, URL)",
+        "Explains when to use FetchContent vs find_package",
+        "Recommends using specific versions/tags for reproducibility",
+        "May mention configure-time vs build-time fetching"
+      ]
+    },
+    {
+      "prompt": "What's the difference between a function and a macro in CMake? When should I use each?",
+      "expectations": [
+        "Explains that functions create new scope, macros don't",
+        "Mentions that macro arguments are text replacements, not variables",
+        "Discusses control flow differences (especially return())",
+        "Provides examples showing the scope difference",
+        "Recommends functions as the default choice",
+        "Explains when macros might be appropriate",
+        "May mention PARENT_SCOPE for functions"
+      ]
+    },
+    {
+      "prompt": "I need to create a reusable CMake function that takes optional arguments. How do I parse keyword arguments?",
+      "expectations": [
+        "Introduces cmake_parse_arguments",
+        "Shows the three types of arguments: options, single-value, multi-value",
+        "Provides a complete example with function definition and usage",
+        "Explains the prefix parameter",
+        "Mentions PARSE_ARGV for functions vs ${ARGN} for macros",
+        "Shows how to check if arguments were provided",
+        "May include example of checking required arguments"
+      ]
+    }
+  ]
+}

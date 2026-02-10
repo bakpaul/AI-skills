@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# Find public dependencies
+# Uncomment if your library has PUBLIC dependencies:
+# find_dependency(Boost 1.70 COMPONENTS system)
+
+# Include the exported targets
+include("${CMAKE_CURRENT_LIST_DIR}/ExampleLibTargets.cmake")
+
+# Check required components
+check_required_components(ExampleLib)
