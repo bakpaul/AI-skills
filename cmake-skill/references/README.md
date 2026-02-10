@@ -8,12 +8,12 @@ This directory contains detailed reference material for the CMake skill.
 - **pitfalls.md** - Common mistakes and how to avoid/fix them
 - **ctest.md** - Testing with CTest (test execution, properties, fixtures, CI)
 - **cpack.md** - Creating distributable packages and installers
-- **targets.md** - Deep dive on CMake targets (to be created as needed)
-- **find-package.md** - Complete find_package guide (to be created as needed)
-- **fetchcontent.md** - FetchContent patterns (to be created as needed)
-- **functions-macros.md** - Functions, macros, scope (to be created as needed)
-- **debugging.md** - Systematic debugging (to be created as needed)
-- **examples.md** - Complete working examples (to be created as needed)
+- **targets.md** - Deep dive on CMake targets
+- **find-package.md** - Complete find_package guide
+- **fetchcontent.md** - FetchContent patterns and best practices
+- **functions-macros.md** - Functions, macros, scope management
+- **debugging.md** - Systematic debugging approaches
+- **examples.md** - Complete working examples
 
 ## When to Use These References
 
