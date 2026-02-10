@@ -1,6 +1,6 @@
 ---
 name: cmake
-description: Expert guidance for modern CMake (3.15+), covering library creation, dependency management, package distribution, and debugging. Use when users need help writing CMakeLists.txt, debugging CMake issues, or creating distributable packages. Always verifies information against CMake documentation when uncertain or when previous advice didn't work as expected.
+description: Expert guidance for modern CMake (3.15+), covering library creation, dependency management, testing with CTest, package distribution with CPack, and debugging. Use when users need help writing CMakeLists.txt, setting up tests, debugging CMake issues, creating distributable packages, or generating installers. Always verifies information against CMake documentation when uncertain or when previous advice didn't work as expected.
 ---
 
 # CMake Expert Skill
@@ -149,6 +149,75 @@ For complete FetchContent guide, see `references/fetchcontent.md`.
 
 For detailed scope management, see `references/functions-macros.md`.
 
+### CTest - Running Tests
+
+CTest is CMake's built-in testing tool for running and reporting test results.
+
+**Basic usage:**
+```cmake
+# Enable testing
+enable_testing()
+
+# Add test executable
+add_executable(my_test tests/test.cpp)
+
+# Register test
+add_test(NAME MyTest COMMAND my_test)
+
+# Set properties (optional)
+set_tests_properties(MyTest PROPERTIES
+    TIMEOUT 30
+    LABELS "Unit"
+)
+```
+
+**Running tests:**
+```bash
+cmake --build build
+ctest --test-dir build                # Run all tests
+ctest --test-dir build -j8           # Parallel execution
+ctest --test-dir build -R TestName   # Run specific test
+ctest --test-dir build -L Unit       # Run by label
+```
+
+**Key features:**
+- Parallel test execution
+- Test filtering and selection
+- Timeout handling
+- Integration with test frameworks (GTest, Catch2)
+- Output validation
+
+For complete CTest guide including fixtures, test properties, CI integration, and test frameworks, see `references/ctest.md`.
+
+### CPack - Creating Installers
+
+CPack creates distributable packages (installers, .deb, .rpm, .dmg, etc.) from your installed files.
+
+**Basic usage:**
+```cmake
+# After project() and install() commands
+set(CPACK_PACKAGE_VENDOR "YourCompany")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_GENERATOR "TGZ;ZIP")  # Or DEB, RPM, NSIS, DragNDrop, etc.
+include(CPack)
+```
+
+**Creating packages:**
+```bash
+cmake --build build
+cmake --install build --prefix staging
+cd build && cpack
+```
+
+**Common generators:**
+- **TGZ/ZIP** - Cross-platform archives
+- **DEB** - Debian/Ubuntu packages
+- **RPM** - RedHat/Fedora packages
+- **NSIS** - Windows installer
+- **DragNDrop** - macOS DMG
+
+For complete CPack guide including platform-specific packaging, component installation, and best practices, see `references/cpack.md`.
+
 ## Workflow Guidelines
 
 ### When User Asks for Help
@@ -225,13 +294,15 @@ For all common pitfalls, see `references/pitfalls.md`.
 The skill includes detailed reference documentation:
 
 - **`references/quick-reference.md`** - Copy-paste ready syntax and checklists
-- **`references/targets.md`** - Deep dive on targets and properties
-- **`references/find-package.md`** - Complete find_package guide
-- **`references/fetchcontent.md`** - FetchContent patterns and best practices
-- **`references/functions-macros.md`** - Functions, macros, scope, and argument parsing
-- **`references/debugging.md`** - Systematic debugging approaches
 - **`references/pitfalls.md`** - Common mistakes and solutions
-- **`references/examples.md`** - Complete working examples
+- **`references/ctest.md`** - Testing with CTest (running tests, test properties, fixtures, CI integration)
+- **`references/cpack.md`** - Creating distributable packages (installers, .deb, .rpm, etc.)
+- **`references/targets.md`** - Deep dive on targets and properties (to be created as needed)
+- **`references/find-package.md`** - Complete find_package guide (to be created as needed)
+- **`references/fetchcontent.md`** - FetchContent patterns and best practices (to be created as needed)
+- **`references/functions-macros.md`** - Functions, macros, scope, and argument parsing (to be created as needed)
+- **`references/debugging.md`** - Systematic debugging approaches (to be created as needed)
+- **`references/examples.md`** - Complete working examples (to be created as needed)
 
 **When to consult references:**
 - User needs detailed explanation beyond quick answer

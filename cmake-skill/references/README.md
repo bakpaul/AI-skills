@@ -6,6 +6,8 @@ This directory contains detailed reference material for the CMake skill.
 
 - **quick-reference.md** - Copy-paste ready syntax, checklists, and tables
 - **pitfalls.md** - Common mistakes and how to avoid/fix them
+- **ctest.md** - Testing with CTest (test execution, properties, fixtures, CI)
+- **cpack.md** - Creating distributable packages and installers
 - **targets.md** - Deep dive on CMake targets (to be created as needed)
 - **find-package.md** - Complete find_package guide (to be created as needed)
 - **fetchcontent.md** - FetchContent patterns (to be created as needed)
