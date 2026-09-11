@@ -1,0 +1,29 @@
+services:
+  ai-sandbox:
+    build:
+        context: ./
+    container_name: ai-sandbox
+    hostname: ai-sandbox
+    image: ai-sandbox
+    stdin_open: true          # -i
+    tty: true                 # -t
+    read_only: true           # --read-only
+    network_mode: host        # --network=host
+    mem_limit: 32g             # --memory=32g
+    cpus: 12                   # --cpus=12
+    pids_limit: 512           # --pids-limit=512
+    cap_drop:
+      - ALL                   # --cap-drop=ALL
+    security_opt:
+      - no-new-privileges:true    # --security-opt=no-new-privileges
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}   # -e ANTHROPIC_API_KEY=""
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=2g            # --tmpfs /tmp:...
+      - /root/.cache:rw,nosuid,size=20g       # pixi's rattler cache lives here
+      - /root/.local/lib/python3.12/site-packages:rw,nosuid,size=2g
+      - /root/.config/SOFA:rw,nosuid,size=10m
+      - /root/.claude:rw,nosuid,size=2g
+      - /root/SOFAData:rw,nosuid,size=10m
+    volumes:
+      - ${SANDBOX_WORKSPACE:?set SANDBOX_WORKSPACE to the directory to mount}:/workspace:rw
