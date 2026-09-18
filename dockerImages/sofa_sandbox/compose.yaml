@@ -14,6 +14,8 @@ services:
     pids_limit: 512           # --pids-limit=512
     cap_drop:
       - ALL                   # --cap-drop=ALL
+    cap_add:
+      - DAC_OVERRIDE
     security_opt:
       - no-new-privileges:true    # --security-opt=no-new-privileges
     environment:
